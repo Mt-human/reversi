@@ -1,21 +1,28 @@
+from enum import Enum
+
+class Status(Enum):
+    space = "･"
+    black = "●"
+    white = "○"
+
 class Piece:
-    states = {".":"･", "black":"●","white":"○"}
 
     def __init__(self, x, y):
-        self.state = self.states["."] #初期状態では全ての目が"・"
+        self.state = Status.space.value #初期状態では全ての目が"・"
         self.x = x
         self.y = y
 
     def set_state(self, color):
-        self.state = self.states[color]
+        self.state = Status[color].value
+        
 
     def reverse_piece(self):  # 裏返す
-        if self.state == self.states["black"]:
-            self.state = self.states["white"]
-        elif self.state == self.states["white"]:
-            self.state = self.states["black"]
+        if self.state == Status.black.value:
+            self.state = Status.white.value
+        elif self.state == Status.white.value:
+            self.state = Status.black.value
         else:
-            self.state = self.states["."]
+            self.state = Status.space.value
 
     def __str__(self):
         return self.state
@@ -45,7 +52,7 @@ class Board:
         return self.__str__() + another
 
     def is_already_put(self, x, y):
-        if self.pieces[y][x].state != "･":
+        if self.pieces[y][x].state != Status.space.value:
             return True
         else:
             return False
@@ -54,13 +61,13 @@ class Board:
         self.pieces[y][x].set_state(color)
         self.last_puted_rocation[0] = x
         self.last_puted_rocation[1] = y
-        self.last_puted_color = Piece.states[color]
+        self.last_puted_color = Status[color].value
 
     def calc_black_area(self):
         area = 0
         for y in self.pieces:
             for x in y:
-                if x.state == "○":
+                if x.state == Status.black.value:
                     area += 1
         return area
 
@@ -68,7 +75,7 @@ class Board:
         area = 0
         for y in self.pieces:
             for x in y:
-                if x.state == "●":
+                if x.state == Status.white.value:
                     area += 1
         return area
 
@@ -248,11 +255,10 @@ class Board:
 
 
 class Player:
-    colors = {"black":"black", "white":"white"}
     def __init__(self, name, color):
         self.piece_has = 32  # オセロのコマの所持数
         self.name = name
-        self.color = self.colors[color]
+        self.color = Status[color]
 
     def put_piece(self):
         self.piece_has -= 1
@@ -276,7 +282,7 @@ class Game:
 
     def turn(self, player):
         while True:
-            p_puts = input("{}({})の手番です([x y]で座標を指定してください):".format(player.name, self.board.pieces[0][0].states[player.color]))
+            p_puts = input("{}({})の手番です([x y]で座標を指定してください):".format(player.name, player.color))
             p_puts = p_puts.strip().split(" ")
             if p_puts[0] == 'q':
                 self.finish_game()
