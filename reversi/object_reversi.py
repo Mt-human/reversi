@@ -1,5 +1,8 @@
+from models.piece import Piece
+from models.status import Status
 from models.board import Board
 from models.player import Player
+
 
 class Game:
     def __init__(self):
