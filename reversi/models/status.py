@@ -16,8 +16,9 @@ class Status(Enum):
     "value": "○"
     }
 
-def label_of(l: str) -> Status:
-    for k in Status:
-        if Status.label == l:
-            return Status.value
-    raise ValueError(f"undefined Status: {l}")
+    @staticmethod
+    def label_of(l: str):
+        for k in Status:
+            if Status.label == l:
+                return Status.value
+        raise ValueError(f"undefined Status: {l}")

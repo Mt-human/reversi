@@ -1,5 +1,5 @@
-from status import Status
-from piece import Piece
+from models.status import Status
+from models.piece import Piece
 
 class Board:
     pieces = [["" for i in range(8)] for j in range(8)]
@@ -24,8 +24,8 @@ class Board:
     def __add__(self, another):
         return self.__str__() + another
 
-    def is_already_put(self, x, y):
-        if self.pieces[y][x].state != Status.SPACE.value:
+    def _is_already_put(self, x, y):
+        if self.pieces[y][x].state != Status.SPACE:
             return True
         else:
             return False
@@ -34,21 +34,21 @@ class Board:
         self.pieces[y][x].set_state(color)
         self.last_puted_rocation[0] = x
         self.last_puted_rocation[1] = y
-        self.last_puted_color = Status[color].value
+        self.last_puted_color = Status[color]
 
-    def calc_BLACK_area(self):
+    def _calc_BLACK_area(self):
         area = 0
         for y in self.pieces:
             for x in y:
-                if x.state == Status.BLACK.value:
+                if x.state == Status.BLACK:
                     area += 1
         return area
 
-    def calc_WHITE_area(self):
+    def _calc_WHITE_area(self):
         area = 0
         for y in self.pieces:
             for x in y:
-                if x.state == Status.WHITE.value:
+                if x.state == Status.WHITE:
                     area += 1
         return area
 

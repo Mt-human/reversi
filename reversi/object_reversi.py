@@ -1,7 +1,6 @@
-from models.piece import Piece
-from models.status import Status
 from models.board import Board
 from models.player import Player
+from models.cpu_player import CPUPlayer
 
 
 class Game:
@@ -10,7 +9,7 @@ class Game:
         self.p2 = Player("Player2", "BLACK")
         self.board = Board()
 
-    def finish_game(self):
+    def _finish_game(self):
         if self.board.BLACK_is_win() is not None:
             if self.board.BLACK_is_win():
                 print("黒が勝ちです。")
@@ -21,22 +20,8 @@ class Game:
         exit()  # これってメモリ解放してくれるん...?
 
     def turn(self, player):
-        while True:
-            p_puts = input("{}({})の手番です([x y]で座標を指定してください):".format(player.name, player.color))
-            p_puts = p_puts.strip().split(" ")
-            if p_puts[0] == 'q':
-                self.finish_game()
-            px = int(p_puts[0]) - 1
-            py = int(p_puts[1]) - 1
-            if self.board.is_already_put(px, py):
-                print("その場所には既にコマが置かれています。")
-                continue
-            if (px < 0) or (px >= 8) or (py < 0) or (py >= 8):
-                print("範囲外です。")
-                continue
-
-            self.board.set_piece_to(px, py, player.color)
-            break
+        px, py = player.choice_place()
+        self.board.set_piece_to(px, py, player.color)
 
     def play_game(self):
         self.board.set_piece_to(3, 3, "BLACK")
