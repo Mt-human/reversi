@@ -19,7 +19,7 @@ class Player:
                 self.finish_game()
             px = int(p_puts[0]) - 1
             py = int(p_puts[1]) - 1
-            if self.board.is_already_put(px, py):
+            if self.board.is_already_put(self, px, py):
                 print("その場所には既にコマが置かれています。")
                 continue
             if (px < 0) or (px >= 8) or (py < 0) or (py >= 8):
