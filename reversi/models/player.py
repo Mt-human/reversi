@@ -4,16 +4,17 @@ from models.board import Board
 class Player:
     def __init__(self, name, color):
         self.piece_has = 32  # オセロのコマの所持数
+        self.board = Board
         self.name = name
-        self.color = Status.label_of(color)
+        self.color = color
 
     def _put_piece(self):
         self.piece_has -= 1
 
     def choice_place(self):
         while True:
-            p_puts = input("{}({})の手番です([x y]で座標を指定してください):".format(player.name, player.color))
-            p_puts = p_puts.strip().split(" ")
+            p_puts = input("{}({})の手番です([x y]で座標を指定してください):".format(self.name, self.color))
+            p_puts = p_puts.split()
             if p_puts[0] == 'q':
                 self.finish_game()
             px = int(p_puts[0]) - 1
@@ -25,4 +26,5 @@ class Player:
                 print("範囲外です。")
                 continue
             break
+        self._put_piece
         return px, py

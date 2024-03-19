@@ -19,6 +19,10 @@ class Status(Enum):
     @staticmethod
     def label_of(l: str):
         for k in Status:
-            if Status.label == l:
-                return Status.value
+            if k.value["label"] == l:
+                return k
         raise ValueError(f"undefined Status: {l}")
+    
+    @property
+    def val(self):
+        return self.value["value"]

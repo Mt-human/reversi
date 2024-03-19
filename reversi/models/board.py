@@ -17,14 +17,14 @@ class Board:
         stage = ""
         for y in range(0, 8):
             for x in range(0, 8):
-                stage += self.pieces[y][x].state
+                stage += self.pieces[y][x].state.val
             stage += "\n"
         return stage
 
     def __add__(self, another):
         return self.__str__() + another
 
-    def _is_already_put(self, x, y):
+    def is_already_put(self, x, y):
         if self.pieces[y][x].state != Status.SPACE:
             return True
         else:
@@ -34,7 +34,7 @@ class Board:
         self.pieces[y][x].set_state(color)
         self.last_puted_rocation[0] = x
         self.last_puted_rocation[1] = y
-        self.last_puted_color = Status[color]
+        self.last_puted_color = Status.label_of(color)
 
     def _calc_BLACK_area(self):
         area = 0

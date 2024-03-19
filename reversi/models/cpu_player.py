@@ -1,7 +1,7 @@
 import random
 from models.status import Status
     
-class CPUPlayer:
+class CpuPlayer:
     def __init__(self, color):
         self.piece_has = 32  # オセロのコマの所持数
         self.color = Status.label_of(color)

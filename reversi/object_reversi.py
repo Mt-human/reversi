@@ -1,12 +1,12 @@
 from models.board import Board
 from models.player import Player
-from models.cpu_player import CPUPlayer
+from models.cpu_player import CpuPlayer
 
 
 class Game:
     def __init__(self):
-        self.p1 = Player("Player1", "WHITE")
-        self.p2 = Player("Player2", "BLACK")
+        self.p1 = Player("Player1", "white")
+        self.p2 = Player("Player2", "black")
         self.board = Board()
 
     def _finish_game(self):
@@ -24,10 +24,10 @@ class Game:
         self.board.set_piece_to(px, py, player.color)
 
     def play_game(self):
-        self.board.set_piece_to(3, 3, "BLACK")
-        self.board.set_piece_to(4, 4, "BLACK")
-        self.board.set_piece_to(3, 4, "WHITE")
-        self.board.set_piece_to(4, 3, "WHITE")
+        self.board.set_piece_to(3, 3, "black")
+        self.board.set_piece_to(4, 4, "black")
+        self.board.set_piece_to(3, 4, "white")
+        self.board.set_piece_to(4, 3, "white")
         # print(id(self.board.board))
         print(self.board + "\nゲームスタート!\n(qでゲームを中断して終了します)")
 
