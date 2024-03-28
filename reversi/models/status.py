@@ -3,7 +3,7 @@ from enum import Enum
 class Status(Enum):
     SPACE = {
     "label": "space",
-    "value": "・"
+    "value": "･"
     }
 
     BLACK = {

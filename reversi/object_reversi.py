@@ -31,7 +31,7 @@ class Game:
         # print(id(self.board.board))
         print(self.board + "\nゲームスタート!\n(qでゲームを中断して終了します)")
 
-        while (self.p1.piece_has != 0) and (self.p1.piece_has != 0):
+        while (self.p1.piece_has != 0) and (self.p2.piece_has != 0):
             self.turn(self.p1)
             self.board.update()
             print(self.board)
@@ -40,7 +40,7 @@ class Game:
             self.board.update()
             print(self.board)
 
-        self.finish_game()
+        self._finish_game()
 
 if __name__ == "__main__":
     g = Game()
